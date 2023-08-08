@@ -5,21 +5,19 @@ import SvgIcon from '@mui/material/SvgIcon';
 import Link from 'next/link';
 // #react imports
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 import styles from '@/styles/Home.module.css';
 import { useRouter } from 'next/router';
 
 
 export default function Home() {
-  const { locales,push} = useRouter()
-const toggleLang = (l:string) =>{
-  push('/', undefined, {locale:l})
-}
-  const [t] = useTranslation('common');
+  const { locales} = useRouter()
+
+  const {t} = useTranslation('common');
   return (
     <>
-    {locales?.map(l => <button style={{margin: '10px'}} key={l} onClick={() =>toggleLang(l)}>{l}</button>)}
+    {locales?.map(locale => <Link style={{padding: '1rem'}} key={locale} href={'/'} locale={locale}>{locale}</Link>)}
        <h2>{t('title')}</h2>
     </>
   )
